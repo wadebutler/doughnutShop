@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import db from "./db";
+import Banner from "./components/Banner";
+import Product from "./components/Product";
+import Cart from "./components/Cart";
+import Form from "./components/Form";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...db,
+      lineItems: [],
+      cartOpen: false,
+
+    }
+  }
+
+  toggleCart = () => {
+    const cartNewState = !this.state.cartOpen;
+    this.setState({
+      cartOpen: cartNewState
+    })
+  }
+
+  addToCart = (product) => {
+    this.setState({
+      lineItems: [...this.state.lineItems, product]
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <span onClick={this.toggleCart}>Cart (0)</span>
+        {this.state.cartOpen &&
+          <Cart lineItems={this.state.lineItems}/>
+        }
+        <Banner banner={db.banner} />
+        <Form />
+        <div className="productList">
+          {db.products.map((product, index) => <Product product={product} addToCart={this.addToCart} key={`product-${index}`}/>)}
+        </div>
+        
+      </div>
+    )
+  }
 }
 
 export default App;
