@@ -58,4 +58,47 @@
   text-transform: uppercase;
   letter-spacing: 1.2px;
 }
+
+.cart {
+  margin: 0;
+  padding: 0;
+  background: white;
+  position: fixed;
+  right: 5%;
+  top: 100px;
+  border: 1px solid black;
+  padding: 20px;
+  width: 350px;
+}
+
+.cart ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 10px;
+}
+
+.cart ul li:last-of-type {
+  border-bottom: none;
+}
+
+.cart ul li img {
+  width: 60px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.cart ul li span {
+  width: calc(100% - 140px);
+}
+
+.cart ul li span:last-of-type {
+  text-align: right;
+  width: 60px;
+}
 /*# sourceMappingURL=App.css.map */
